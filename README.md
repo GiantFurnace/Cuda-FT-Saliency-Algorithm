@@ -21,11 +21,11 @@ Compiled opencv-3.3.0 with cuda using CMake, CUDA8.0.
 ## 3. Applications
 
 ### 3.1 Fabric Defects Inspection
-<p align="center">
+<p align="left">
   <img width="320" height="320" src="./docs/imgs/sample.jpg">
 </p>
 
-<p align="center">
+<p align="left">
   <img width="320" height="320" src="./docs/imgs/saliency.jpg">
 </p>
 
