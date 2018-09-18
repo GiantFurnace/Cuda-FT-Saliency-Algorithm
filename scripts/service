@@ -1,0 +1,79 @@
+#!/bin/bash
+#scripts name:
+#author:chenzhengqiang
+#generate date:2018/06/19 14:38:13
+#modified date:
+
+
+
+#information about this service
+#service name:#you must fill the service name right here
+service=#you must fill the service name right here
+args=
+go=/usr/local/bin/$service $args
+pid_file=/var/run/$service.pid
+
+
+
+function start(){
+pid=`pidof $service`
+if [ -n "$pid" ];then
+echo "Start failed,Service $service(pid $pid) Is Running."
+exit 0
+fi
+echo -n "Starting Service $service......"
+touch $pid_file
+$go
+pid=`pidof $service`
+echo $pid > $pid_file
+sleep 0.3
+echo "(pid $pid)          [    OK    ]"
+pid=`pidof $service`
+}
+
+
+
+function stop(){
+pid=`pidof $service`
+if [ -n "$pid" ];then
+echo -n "Shuting Down Service $service......"
+sleep 0.3
+kill -9 $pid
+if [ $? -eq 0 ];then
+echo "                    [    OK    ]"
+else
+echo "(pid $pid)	  [   FAILED ]"
+fi
+else
+echo "Error:Service $service Is Not Running."
+fi
+rm -rf $lock
+rm -rf $pid_file
+}
+
+
+
+function status(){
+pid=`pidof $service`
+if [ -n "$pid" ];then
+echo "Service $service(pid $pid) Is Running"
+else
+echo "Service $service Has Stoped"
+fi
+}
+
+
+
+function restart(){
+stop
+start
+}
+
+
+
+case "$1" in
+"start") start;;
+"stop")  stop;;
+"status") status;;
+"restart") restart;;
+esac
