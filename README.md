@@ -34,7 +34,7 @@ Compiled opencv-3.3.0 with cuda using CMake, CUDA8.0.
     Email: 18819373904m@sina.cn
     wechat: 18819373904
 
-**Notice:  Any comments and suggetions are welcomed**
+**Notice:  Any comments and suggestions are welcomed**
 
 ## 5. License
 [Apache License 2.0](./LICENSE)
