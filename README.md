@@ -8,10 +8,10 @@ which focus on surface defect inspection with salience algorithm.
 
 
 ## 2. Usage
+### Compiled opencv-3.3.0 with cuda using CMake, CUDA8.0 in ubuntu 16.04
+- just simply run the shell script ./script/prepare_install.sh for environment setting up 
 
-Compiled opencv-3.3.0 with cuda using CMake, CUDA8.0.
-
-### How to use this project
+### How to use this project for defect detecting
 
 - configure autogen.sh and using the shell script to generate the Makefile
 
@@ -23,11 +23,9 @@ Compiled opencv-3.3.0 with cuda using CMake, CUDA8.0.
 ### 3.1 Fabric Defects Inspection
 <p align="left">
   <img width="320" height="320" src="./docs/imgs/sample.jpg">
-</p>
-
-<p align="left">
   <img width="320" height="320" src="./docs/imgs/saliency.jpg">
 </p>
+
 
 ## 4. Contact
     Name: chenzhengqiang
