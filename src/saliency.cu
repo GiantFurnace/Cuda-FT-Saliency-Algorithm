@@ -1,10 +1,17 @@
+/*
+@author:chenzhengqiang
+@date:2018-09-25
+@email:642346572@qq.com
+*/
+
+
 #include "config.h"
 #include "saliency.h"
 #include "opencv_common.h"
 #include "cuda_common.h"
 
 
-__global__ void bgr2lab(cuda::PtrStepSz<uchar> Bimg_, cuda::PtrStepSz<uchar> Gimg_, cuda::PtrStepSz<uchar> Rimg_,
+__global__ void bgr2lab(const cuda::PtrStepSz<uchar> Bimg_, const cuda::PtrStepSz<uchar> Gimg_, const cuda::PtrStepSz<uchar> Rimg_,
                         cuda::PtrStepSz<double> Limg, cuda::PtrStepSz<double> Aimg, cuda::PtrStepSz<double> Bimg)
 {
     int x = threadIdx.x + blockIdx.x * blockDim.x;  
@@ -66,36 +73,33 @@ __global__ void bgr2lab(cuda::PtrStepSz<uchar> Bimg_, cuda::PtrStepSz<uchar> Gim
 }
 
 
-void obtain_saliency_with_ft( struct GPU_BUFFER & gpu_buffer_ )
+void obtain_saliency_with_ft( BUFFER::GLOBAL_BUFFER & global_buffer )
 {
  		
-  	  
-    dim3 threads(GLOBAL_CONFIG::CUDA_THREADS_SIZE, GLOBAL_CONFIG::CUDA_THREADS_SIZE);
-    dim3 blocks(GLOBAL_CONFIG::IMAGE_ROWS/GLOBAL_CONFIG::CUDA_THREADS_SIZE, GLOBAL_CONFIG::IMAGE_COLS/GLOBAL_CONFIG::CUDA_THREADS_SIZE);
          	
-    bgr2lab<<<blocks,threads>>>(gpu_buffer_.BGR[0], gpu_buffer_.BGR[1], gpu_buffer_.BGR[2], 
-                                gpu_buffer_.Limg, gpu_buffer_.Aimg, gpu_buffer_.Bimg);
+    bgr2lab<<<global_buffer.BLOCKS, global_buffer.THREADS>>>(global_buffer.BGR[0], global_buffer.BGR[1], global_buffer.BGR[2], 
+                                global_buffer.Limg, global_buffer.Aimg, global_buffer.Bimg);
     
     double mean_lab[3];
     
-    mean_lab[0] = (cuda::sum(gpu_buffer_.Limg)).val[0] / (GLOBAL_CONFIG::IMAGE_PIXELS);
-    mean_lab[1] = (cuda::sum(gpu_buffer_.Aimg)).val[0] / (GLOBAL_CONFIG::IMAGE_PIXELS);
-    mean_lab[2] = (cuda::sum(gpu_buffer_.Bimg)).val[0] / (GLOBAL_CONFIG::IMAGE_PIXELS);
+    mean_lab[0] = (cuda::sum(global_buffer.Limg)).val[0] / (global_buffer.IMAGE_PIXELS);
+    mean_lab[1] = (cuda::sum(global_buffer.Aimg)).val[0] / (global_buffer.IMAGE_PIXELS);
+    mean_lab[2] = (cuda::sum(global_buffer.Bimg)).val[0] / (global_buffer.IMAGE_PIXELS);
 
     cuda::Stream stream;	
-    cuda::absdiff(gpu_buffer_.Limg, mean_lab[0],  gpu_buffer_.Limg, stream);
-    cuda::pow(gpu_buffer_.Limg, 2,  gpu_buffer_.Limg, stream);
+    cuda::absdiff(global_buffer.Limg, mean_lab[0],  global_buffer.Limg, stream);
+    cuda::pow(global_buffer.Limg, 2,  global_buffer.Limg, stream);
 
-    cuda::absdiff(gpu_buffer_.Aimg, mean_lab[1],  gpu_buffer_.Aimg, stream);
-    cuda::pow(gpu_buffer_.Aimg, 2, gpu_buffer_.Aimg, stream);
+    cuda::absdiff(global_buffer.Aimg, mean_lab[1],  global_buffer.Aimg, stream);
+    cuda::pow(global_buffer.Aimg, 2, global_buffer.Aimg, stream);
 
-    cuda::absdiff(gpu_buffer_.Bimg, mean_lab[2],  gpu_buffer_.Bimg, stream);
-    cuda::pow(gpu_buffer_.Bimg, 2, gpu_buffer_.Bimg, stream);
+    cuda::absdiff(global_buffer.Bimg, mean_lab[2],  global_buffer.Bimg, stream);
+    cuda::pow(global_buffer.Bimg, 2, global_buffer.Bimg, stream);
 
-    cuda::add(gpu_buffer_.Limg, gpu_buffer_.Aimg, gpu_buffer_.combine, gpu_buffer_.tmp, -1, stream);
-    cuda::add(gpu_buffer_.Bimg, gpu_buffer_.combine, gpu_buffer_.combine, gpu_buffer_.tmp, -1, stream);
-    cuda::normalize(gpu_buffer_.combine, gpu_buffer_.combine, 1, 0, NORM_MINMAX, -1, gpu_buffer_.tmp, stream);
-    gpu_buffer_.combine.convertTo(gpu_buffer_.saliency_map, CV_8UC1,  255, 0, stream);
+    cuda::add(global_buffer.Limg, global_buffer.Aimg, global_buffer.norm, global_buffer.tmp, -1, stream);
+    cuda::add(global_buffer.Bimg, global_buffer.norm, global_buffer.norm, global_buffer.tmp, -1, stream);
+    cuda::normalize(global_buffer.norm, global_buffer.norm, 1, 0, NORM_MINMAX, -1, global_buffer.tmp, stream);
+    global_buffer.norm.convertTo(global_buffer.saliency_map, CV_8UC1,  255, 0, stream);
     stream.waitForCompletion();
 }
 

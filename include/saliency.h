@@ -5,6 +5,6 @@
 
 #ifndef _BACKER_SALIENCY_FT_H_
 #define _BACKER_SALIENCY_FT_H_
-#include "gpu_buffer.h"
-void obtain_saliency_with_ft( struct GPU_BUFFER & gpu_buffer_ );
+#include "buffer.h"
+void obtain_saliency_with_ft( BUFFER::GLOBAL_BUFFER & global_buffer );
 #endif
