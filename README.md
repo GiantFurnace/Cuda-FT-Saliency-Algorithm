@@ -6,12 +6,12 @@
 Defect Detecting With Cuda project is an open source software based on opencv-3.3.0 library and cuda-8.0 in nvidia, 
 which focus on surface defect inspection with saliency filter.
 Open Source Computer Vision Library.[opencv https://opencv.org/](https://opencv.org/)<br />
-introduction about CUDA .[cuda https://en.wikipedia.org/wiki/CUDA] (https://en.wikipedia.org/wiki/CUDA)<br />
-introduction about saliency .[saliency https://en.wikipedia.org/wiki/Salience_(neuroscience)](https://en.wikipedia.org/wiki/Salience_(neuroscience))<br />  
+Introduction about CUDA .[cuda https://en.wikipedia.org/wiki/CUDA](https://en.wikipedia.org/wiki/CUDA)<br />
+Introduction about saliency .[saliency https://en.wikipedia.org/wiki/Salience_(neuroscience)](https://en.wikipedia.org/wiki/Salience_(neuroscience))<br />  
 
 ## 2. Usage
 ### Compiled opencv-3.3.0 with cuda using CMake, CUDA8.0 in ubuntu 16.04
-- download and install CUDA-8.0 from [nvida https://developer.nvidia.com/cuda-80-download-archive](https://developer.nvidia.com/cuda-80-download-archive)<br /> 
+- download and install CUDA-8.0 from [https://developer.nvidia.com/cuda-80-download-archive](https://developer.nvidia.com/cuda-80-download-archive)<br /> 
 - then just simply run the shell script ./script/prepare_install.sh for environment setting up 
 
 ### How to use this project for defect detecting
