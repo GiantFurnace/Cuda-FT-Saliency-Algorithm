@@ -14,7 +14,6 @@ int fabric_detect( cv::Mat sample_image, BUFFER::GLOBAL_BUFFER & global_buffer )
 {
     cuda::split(sample_image, global_buffer.BGR);
     obtain_saliency_with_ft(global_buffer);
-    Mat saliency_map;
     int max_entropy = get_max_entropy(global_buffer);
     cuda::threshold(global_buffer.saliency_map, global_buffer.threshold_image, max_entropy, 255, CV_THRESH_BINARY);
     global_buffer.threshold_image.download(global_buffer.local);
