@@ -20,12 +20,17 @@ which focus on surface defect inspection with salience algorithm.
 
 ## 3. Applications
 
-### 3.1 Fabric Defects Inspection
+### 3.1 Fabric Defects Inspection step 1
 <p align="left">
   <img width="320" height="320" src="./docs/imgs/sample.jpg">
   <img width="320" height="320" src="./docs/imgs/saliency.jpg">
 </p>
 
+### 3.2 Fabric Dectects Inspection step 2
+<p align="left">
+  <img width="320" height="320" src="./docs/imgs/sample.jpg">
+  <img width="320" height="320" src="./docs/imgs/final.jpg">
+</p>
 
 ## 4. Contact
     Name: chenzhengqiang
