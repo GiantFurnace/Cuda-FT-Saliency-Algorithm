@@ -20,14 +20,13 @@ int fabric_detect( cv::Mat sample_image, BUFFER::GLOBAL_BUFFER & global_buffer )
     global_buffer.threshold_image.download(global_buffer.local);
 
     int ret = remove_area_by_adaptive_threshold(global_buffer.local);
-    imwrite("local.jpg", global_buffer.local);
+
     if ( ret < 0 )
     {
         return 0;
     }
 
     double rate = (double)countNonZero(global_buffer.local) / global_buffer.IMAGE_PIXELS;
-    std::cout<<"rate is"<<rate<<std::endl;
     if ( rate <= global_buffer.THRESHOLD_MIN || rate >= global_buffer.THRESHOLD_MAX )
     {
         return 0;
