@@ -4,7 +4,7 @@
 ## 1. Abstract
 
 Defect Detecting With Cuda project is an open source software based on opencv-3.3.0 library and cuda-8.0 in nvidia, 
-which focus on surface defect inspection with saliency filter.
+which focus on surface defect inspection with saliency filter.<br />
 Open Source Computer Vision Library.[opencv https://opencv.org/](https://opencv.org/)<br />
 Introduction about CUDA .[cuda https://en.wikipedia.org/wiki/CUDA](https://en.wikipedia.org/wiki/CUDA)<br />
 Introduction about saliency .[saliency https://en.wikipedia.org/wiki/Salience_(neuroscience)](https://en.wikipedia.org/wiki/Salience_(neuroscience))<br />  
