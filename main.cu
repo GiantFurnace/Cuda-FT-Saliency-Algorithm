@@ -19,7 +19,7 @@ using std::cerr;
 
 
 BUFFER::GLOBAL_BUFFER global_buffer;
-const char * DEFAULT_CONFIG_FILE="./config/server.conf";
+static const char * DEFAULT_CONFIG_FILE="./config/server.conf";
 
 int main(int argc, char ** argv) 
 {
