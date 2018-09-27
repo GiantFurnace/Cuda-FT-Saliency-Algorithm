@@ -37,9 +37,10 @@ Introduction about saliency .[saliency https://en.wikipedia.org/wiki/Salience_(n
 </p>
 
 ## 4. Contact
-    Name: chenzhengqiang
-    Email: 18819373904m@sina.cn
-    wechat: 18819373904
+
+|Author          | Email            | Wechat      |
+| ---------------|:----------------:| -----------:|
+| chenzhengqiang | 642346572@qq.com | 18819373904 |
 
 **Notice:  Any comments and suggestions are welcomed**
 
