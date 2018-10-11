@@ -15,7 +15,7 @@ sudo apt-get -y install python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev l
 
 
 if [ ! -d "./$OPENCV_DIR" ];then
-    wget https://github.com/opencv/opencv/archive/$OPENCV_VERSION.tar.gz && tar -xzf $OPENCV_VERSION.tar.gz
+    wget https://github.com/opencv/opencv/archive/$OPENCV_VERSION.tar.gz --no-check-certificate && tar -xzf $OPENCV_VERSION.tar.gz
 fi
 
 
